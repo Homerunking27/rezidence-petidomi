@@ -1,0 +1,62 @@
+[
+  {
+    "id": "101",
+    "layout": "1kk ateliér",
+    "floor": 1,
+    "areaTotal": 22,84,
+    "balconyArea": 0,
+    "orientation": "SE",
+    "price": 2284000,
+    "status": "Volné",
+    "pdfFile": "units/101.pdf",
+    "shortDesc": ""
+  },
+  {
+    "id": "201",
+    "layout": "4kk",
+    "floor": 2,
+    "areaTotal": 86,66,
+    "balconyArea": 0,
+    "orientation": "S,N,E",
+    "price": 8660000,
+    "status": "Volné",
+    "pdfFile": "units/201.pdf",
+    "shortDesc": ""
+  },
+  {
+    "id": "301",
+    "layout": "1kk",
+    "floor": 3,
+    "areaTotal": 23,74,
+    "balconyArea": 0,
+    "orientation": "SE",
+    "price": 2374000,
+    "status": "Volné",
+    "pdfFile": "units/301.pdf",
+    "shortDesc": ""
+  },
+  {
+    "id": "302",
+    "layout": "3kk",
+    "floor": 3,
+    "areaTotal": 61,88,
+    "balconyArea": 0,
+    "orientation": "S,N,W",
+    "price": 6188000,
+    "status": "Volné",
+    "pdfFile": "units/302.pdf",
+    "shortDesc": ""
+  },
+  {
+    "id": "401",
+    "layout": "3kk",
+    "floor": 4,
+    "areaTotal": 76,21,
+    "balconyArea": 0,
+    "orientation": "S,N",
+    "price": 7621000,
+    "status": "Volné",
+    "pdfFile": "units/401.pdf",
+    "shortDesc": ""
+  }
+]
