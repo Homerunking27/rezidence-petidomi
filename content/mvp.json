@@ -1,0 +1,32 @@
+{
+  "projectName": "Rezidence Pětidomí",
+  "domain": "sbcg-petidomi.cz",
+  "city": "České Budějovice",
+  "district": "Suché Vrbné",
+  "addressLine": "Přemyslova 1635/20",
+  "heroH1": "Váš nový domov v Suchém Vrbném",
+  "heroSubhead": "Pět bytů v zrekonstruovaném domě v Českých Budějovicích. Klidná čtvrť, výborná dostupnost, poctivě udělané bydlení.",
+  "priceFrom": "2 284 000 Kč",
+  "handoverDate": "listopad 2026",
+  "benefits": ["Parkovací stání", "Klidná část města", "Klientské změny možné"],
+  "distances": [
+    { "label": "Potraviny", "value": "600 m" },
+    { "label": "Zastávka MHD", "value": "140 m" },
+    { "label": "Nádraží", "value": "1600 m" },
+    { "label": "Dálnice", "value": "1500 m" }
+  ],
+  "timeline": [
+    { "label": "Zahájení", "date": "říjen 2025" },
+    { "label": "Kolaudace", "date": "říjen 2026" },
+    { "label": "Předání", "date": "listopad 2026" }
+  ],
+  "contact": {
+    "name": "Lucie Korčáková",
+    "phone": "724 026 574",
+    "email": "lucka@sbcg.cz"
+  },
+  "map": {
+    "shareUrl": "https://maps.app.goo.gl/tA9gZPvrFjFchdv87"
+  },
+  "standardsPdfFileName": "standardy.pdf"
+}
