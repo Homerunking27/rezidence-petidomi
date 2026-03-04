@@ -19,7 +19,15 @@ export default function OnePager() {
       {/* NAV */}
       <header className="nav">
         <div className="navInner">
-          <div className="brand">{site.projectName}</div>
+          <div className="brand">
+            {/* Upload your logo to /public/assets/logo.png (or svg) */}
+            <img className="brandMark" src="/assets/logo.png" alt={`${site.projectName} logo`} />
+            <div className="brandText">
+              <div className="brandName">{site.projectName}</div>
+              <div className="brandTag">{site.district}, {site.city}</div>
+            </div>
+          </div>
+
           <nav className="navLinks">
             <a href="#byty">Seznam bytů</a>
             <a href="#okoli">Okolí</a>
@@ -39,21 +47,14 @@ export default function OnePager() {
           <div className="badges">
             <span className="badge">Od {site.priceFrom}</span>
             <span className="badge">Předání {site.handoverDate}</span>
-            <span className="badge">
-              {site.district}, {site.city}
-            </span>
+            <span className="badge">{site.district}, {site.city}</span>
           </div>
 
-          <div className="btnRow">
-            <a className="btnPrimary" href="#byty">
-              Zobrazit byty
-            </a>
-            <a className="btnSecondary" href="#kontakt">
-              Domluvit prohlídku
-            </a>
+          <div className="btnRow heroActions">
+            <a className="btnPrimary" href="#byty">Zobrazit byty</a>
+            <a className="btnSecondary" href="#kontakt">Domluvit prohlídku</a>
           </div>
 
-          {/* Nice framed hero image */}
           <div className="heroCard">
             <img
               className="heroImg"
@@ -66,20 +67,50 @@ export default function OnePager() {
 
         {/* BENEFITS */}
         <section id="vyhody" className="section">
-          <h2 className="h2">Proč právě tady</h2>
+          <div className="sectionHeader center">
+            <div className="sectionKicker">Benefity</div>
+            <h2 className="h2">Proč právě tady</h2>
+            <div className="sectionDesc">
+              Krátký seznam věcí, které mají v každodenním životě největší hodnotu. Jasně, jednoduše, bez marketingové vaty.
+            </div>
+          </div>
+
           <div className="grid3">
-            {site.benefits.map((b) => (
-              <div className="card" key={b}>
-                <div className="cardTitle">{b}</div>
-                <div className="cardText">Poctivé bydlení bez zbytečných kompromisů.</div>
+            <div className="card iconCard">
+              <div className="iconDot">{icons.parking}</div>
+              <div>
+                <div className="cardTitle">{site.benefits[0] ?? "Parkovací stání"}</div>
+                <div className="cardText">Vyhrazené stání. Žádné večerní kroužení kolem bloku.</div>
               </div>
-            ))}
+            </div>
+
+            <div className="card iconCard">
+              <div className="iconDot">{icons.leaf}</div>
+              <div>
+                <div className="cardTitle">{site.benefits[1] ?? "Klidná část města"}</div>
+                <div className="cardText">Vedlejší ulice, ale skvělá dostupnost. Ticho, které si všimnete.</div>
+              </div>
+            </div>
+
+            <div className="card iconCard">
+              <div className="iconDot">{icons.wrench}</div>
+              <div>
+                <div className="cardTitle">{site.benefits[2] ?? "Klientské změny možné"}</div>
+                <div className="cardText">Dolaďte standardy včas. Dohoda jasně, termíny pevně.</div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* UNITS */}
         <section id="byty" className="section">
-          <h2 className="h2">Seznam bytů</h2>
+          <div className="sectionHeader">
+            <div className="sectionKicker">Dostupnost</div>
+            <h2 className="h2">Seznam bytů</h2>
+            <div className="sectionDesc">
+              Klikněte na “Detail” pro rychlý přehled a stažení PDF.
+            </div>
+          </div>
 
           <div className="tableWrap">
             <table>
@@ -106,9 +137,7 @@ export default function OnePager() {
                     <td>{formatArea(u.balconyArea)}</td>
                     <td>{u.orientation}</td>
                     <td>{u.price ? `${formatCzk(u.price)} Kč` : "—"}</td>
-                    <td>
-                      <StatusPill status={u.status} />
-                    </td>
+                    <td><StatusPill status={u.status} /></td>
                     <td>
                       <button className="modalClose" onClick={() => setOpenUnitId(u.id)}>
                         Detail
@@ -127,30 +156,31 @@ export default function OnePager() {
 
         {/* LOCATION */}
         <section id="okoli" className="section">
-          <h2 className="h2">Okolí</h2>
+          <div className="sectionHeader">
+            <div className="sectionKicker">Lokalita</div>
+            <h2 className="h2">Okolí</h2>
+            <div className="sectionDesc">
+              Suché Vrbné je praktické. Všechno, co řešíte každý den, je v dosahu. Adresa projektu: <strong>{site.addressLine}</strong>.
+            </div>
+          </div>
 
           <div className="card">
-            <div className="cardTitle">
-              {site.addressLine}, {site.city}
-            </div>
-
-            <div style={{ marginTop: 12 }} className="grid3">
+            <div className="locationGrid">
               {site.distances.map((d) => (
-                <div key={d.label} style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
-                  <span style={{ color: "var(--muted)" }}>{d.label}</span>
-                  <span style={{ fontWeight: 760 }}>{d.value}</span>
+                <div key={d.label} className="locationItem">
+                  <div className="locationLabel">{d.label}</div>
+                  <div className="locationValue">{d.value}</div>
                 </div>
               ))}
             </div>
 
-            <div className="btnRow">
+            <div className="mapActions">
               <a className="btnSecondary" href={site.map.shareUrl} target="_blank" rel="noreferrer">
-                Otevřít v Mapách
+                {icons.map} Otevřít v Mapách
               </a>
             </div>
 
-            {/* Optional image: will auto-hide if missing */}
-            <div className="heroCard" style={{ marginTop: 14 }}>
+            <div className="heroCard" style={{ marginTop: 0 }}>
               <img
                 className="heroImg"
                 src="/assets/story.jpg"
@@ -161,56 +191,57 @@ export default function OnePager() {
           </div>
         </section>
 
-        {/* STANDARDS */}
+        {/* STANDARDY + HARMONOGRAM + KONTAKT (more “designed”) */}
         <section id="standardy" className="section">
-          <h2 className="h2">Standardy</h2>
-          <div className="card">
-            <div className="cardText" style={{ marginTop: 0 }}>
-              Detailní standardní provedení ke stažení v PDF.
-            </div>
-            <div className="btnRow">
-              <a className="btnPrimary" href={`/assets/${site.standardsPdfFileName}`}>
-                Stáhnout standardy (PDF)
-              </a>
+          <div className="sectionHeader center">
+            <div className="sectionKicker">Dokumenty & plán</div>
+            <h2 className="h2">Standardy, harmonogram a kontakt</h2>
+            <div className="sectionDesc">
+              Vše důležité na jednom místě. PDF standardy, termíny a přímý kontakt bez formulářového pekla.
             </div>
           </div>
-        </section>
 
-        {/* TIMELINE */}
-        <section id="harmonogram" className="section">
-          <h2 className="h2">Harmonogram</h2>
-          <div className="grid3">
-            {site.timeline.map((t) => (
-              <div className="card" key={t.label}>
-                <div className="cardTitle">{t.label}</div>
-                <div style={{ marginTop: 10, fontSize: 18 }}>{t.date}</div>
+          <div className="cardsRow">
+            {/* Standards */}
+            <div className="card center">
+              <div className="iconDot" style={{ margin: "0 auto 12px auto" }}>{icons.doc}</div>
+              <div className="cardTitle">Standardy</div>
+              <div className="cardText">Detailní standardní provedení ke stažení v PDF.</div>
+              <div className="btnRow">
+                <a className="btnPrimary" href={`/assets/${site.standardsPdfFileName}`}>
+                  Stáhnout standardy (PDF)
+                </a>
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* CONTACT */}
-        <section id="kontakt" className="section">
-          <h2 className="h2">Kontakt</h2>
-          <div className="card">
-            <div style={{ fontWeight: 820 }}>{site.contact.name}</div>
-            <div style={{ marginTop: 10 }}>
-              <a href={`tel:${stripSpaces(site.contact.phone)}`}>{site.contact.phone}</a>
-            </div>
-            <div style={{ marginTop: 6 }}>
-              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
             </div>
 
-            <div className="btnRow">
-              <a
-                className="btnPrimary"
-                href={`mailto:${site.contact.email}?subject=${encodeURIComponent(site.projectName)}%20-%20dotaz`}
-              >
-                Napsat email
-              </a>
-              <a className="btnSecondary" href={`tel:${stripSpaces(site.contact.phone)}`}>
-                Zavolat
-              </a>
+            {/* Timeline */}
+            <div className="card center" id="harmonogram">
+              <div className="iconDot" style={{ margin: "0 auto 12px auto" }}>{icons.clock}</div>
+              <div className="cardTitle">Harmonogram</div>
+              <div className="cardText">
+                {site.timeline.map((t) => `${t.label}: ${t.date}`).join(" · ")}
+              </div>
+              <div className="btnRow">
+                <a className="btnSecondary" href="#byty">{icons.list} Zobrazit byty</a>
+              </div>
+            </div>
+
+            {/* Contact */}
+            <div className="card center" id="kontakt">
+              <div className="iconDot" style={{ margin: "0 auto 12px auto" }}>{icons.chat}</div>
+              <div className="cardTitle">{site.contact.name}</div>
+              <div className="cardText">
+                <div><a href={`tel:${stripSpaces(site.contact.phone)}`}>{site.contact.phone}</a></div>
+                <div><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></div>
+              </div>
+              <div className="btnRow">
+                <a className="btnPrimary" href={`mailto:${site.contact.email}?subject=${encodeURIComponent(site.projectName)}%20-%20dotaz`}>
+                  Napsat email
+                </a>
+                <a className="btnSecondary" href={`tel:${stripSpaces(site.contact.phone)}`}>
+                  Zavolat
+                </a>
+              </div>
             </div>
           </div>
 
@@ -221,7 +252,6 @@ export default function OnePager() {
         </section>
       </main>
 
-      {/* MODAL */}
       {openUnit ? <UnitModal unit={openUnit} onClose={() => setOpenUnitId(null)} /> : null}
     </>
   );
@@ -253,9 +283,7 @@ function UnitModal({ unit, onClose }: { unit: Unit; onClose: () => void }) {
             </div>
           </div>
 
-          <button className="modalClose" onClick={onClose}>
-            Zavřít
-          </button>
+          <button className="modalClose" onClick={onClose}>Zavřít</button>
         </div>
 
         <div style={{ marginTop: 16 }} className="card">
@@ -278,18 +306,68 @@ function UnitModal({ unit, onClose }: { unit: Unit; onClose: () => void }) {
   );
 }
 
+/* Helpers */
 function formatCzk(n: number) {
   return new Intl.NumberFormat("cs-CZ").format(n);
 }
-
 function stripSpaces(s: string) {
   return s.replace(/\s+/g, "");
 }
-
 function formatArea(n: number) {
   if (!n || Number.isNaN(n)) return "—";
-  // show 2 decimals only if needed
   const rounded = Math.round(n * 100) / 100;
-  const asInt = Number.isInteger(rounded);
-  return asInt ? String(rounded) : rounded.toFixed(2);
+  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2);
 }
+
+/* Inline icons (no libs) */
+const icons = {
+  parking: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7 4h7a5 5 0 0 1 0 10H7V4Z" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M7 14v6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  ),
+  leaf: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M20 4c-9 1-14 6-15 15 9-1 14-6 15-15Z" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M7 17c3-5 7-7 12-8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  ),
+  wrench: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M14.5 6.5a4.5 4.5 0 0 0-5.9 5.9L4 17.1 6.9 20l4.7-4.6a4.5 4.5 0 0 0 5.9-5.9L14 10l-1.6-1.6 2.1-1.9Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    </svg>
+  ),
+  map: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M10 18 4 20V6l6-2 4 2 6-2v14l-6 2-4-2Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M10 4v14" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M14 6v14" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  ),
+  doc: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7 3h7l3 3v15H7V3Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M14 3v3h3" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M9 12h6M9 16h6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  ),
+  clock: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z" stroke="currentColor" strokeWidth="1.7" />
+      <path d="M12 7v6l4 2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  ),
+  chat: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M20 15a4 4 0 0 1-4 4H9l-5 3V7a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M8 9h8M8 13h6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  ),
+  list: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M8 7h12M8 12h12M8 17h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M4 7h.01M4 12h.01M4 17h.01" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  )
+};
