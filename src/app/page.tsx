@@ -21,7 +21,7 @@ export default function OnePager() {
         <div className="navInner">
           <div className="brand">
             {/* Upload your logo to /public/assets/logo.png (or svg) */}
-            <img className="brandMark" src="/assets/logo.png" alt={`${site.projectName} logo`} />
+            <img className="brandMark" src="/assets/logo.svg" alt={`${site.projectName} logo`} />
             <div className="brandText">
               <div className="brandName">{site.projectName}</div>
               <div className="brandTag">{site.district}, {site.city}</div>
