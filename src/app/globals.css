@@ -310,3 +310,149 @@ tbody tr:hover{
   .container{ padding: 40px var(--pad); }
   table{ min-width: 760px; }
 }
+
+/* ====== BEAUTY PATCH v1 ====== */
+
+/* Header brand with logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 780;
+}
+.brandMark {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: block;
+  object-fit: contain;
+  background: rgba(255,255,255,.9);
+  border: 1px solid var(--border);
+}
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+.brandName {
+  font-size: 15px;
+  letter-spacing: -0.02em;
+}
+.brandTag {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Hero spacing: fix “buttons glued to image” */
+.heroActions {
+  margin-top: 22px;
+}
+.heroCard {
+  margin-top: 18px; /* give breathing room */
+}
+
+/* Make badges less bubble-y */
+.badge {
+  background: rgba(255,255,255,.65);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 18px rgba(0,0,0,.04);
+}
+
+/* Section header (centered) */
+.sectionHeader {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.sectionHeader.center {
+  text-align: center;
+  justify-items: center;
+}
+.sectionKicker {
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.45);
+}
+.sectionDesc {
+  max-width: 720px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Benefit cards with icon */
+.iconCard {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.iconDot {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.85);
+  box-shadow: 0 12px 30px rgba(0,0,0,.05);
+  display: grid;
+  place-items: center;
+}
+.iconDot svg {
+  width: 20px;
+  height: 20px;
+  opacity: .9;
+}
+
+/* Location row spacing fix */
+.locationGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.locationItem {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255,255,255,.85);
+}
+.locationLabel {
+  color: var(--muted);
+  font-size: 13px;
+}
+.locationValue {
+  margin-top: 6px;
+  font-weight: 820;
+  letter-spacing: -0.01em;
+}
+
+/* Map button spacing */
+.mapActions {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* “Cards row” for Standardy / Harmonogram / Kontakt */
+.cardsRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+@media (max-width: 900px) {
+  .locationGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cardsRow { grid-template-columns: 1fr; }
+}
+
+/* Center these sections a bit more */
+.card.center {
+  text-align: center;
+}
+.card.center .btnRow {
+  justify-content: center;
+}
+
+/* Make modal close button look like a button not a chip */
+.modalClose {
+  font-weight: 720;
+}
