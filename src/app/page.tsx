@@ -20,12 +20,12 @@ export default function OnePager() {
       <header className="nav">
         <div className="navInner">
           <div className="brand">
-            {/* Upload your logo to /public/assets/logo.png (or svg) */}
-            <img className="brandMark" src="/assets/logo.png" alt={`${site.projectName} logo`} />
-            <div className="brandText">
-              <div className="brandName">{site.projectName}</div>
-              <div className="brandTag">{site.district}, {site.city}</div>
-            </div>
+            <img
+              className="brandMark"
+              src="/assets/logo.png"
+              alt={site.projectName}
+              onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
+            />
           </div>
 
           <nav className="navLinks">
