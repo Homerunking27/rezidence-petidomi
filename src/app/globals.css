@@ -313,35 +313,30 @@ tbody tr:hover{
 
 /* ====== BEAUTY PATCH v1 ====== */
 
-/* Header brand with logo */
+/* Header logo-only (wide logo) */
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
   font-weight: 780;
 }
+
 .brandMark {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  display: block;
+  height: 34px;         /* adjust: 32–40px */
+  width: auto;
+  max-width: 260px;     /* prevents huge banner */
+  border-radius: 0;     /* logo is a banner, no rounded box */
+  border: 0;
+  background: transparent;
+  box-shadow: none;
   object-fit: contain;
-  background: rgba(255,255,255,.9);
-  border: 1px solid var(--border);
+  display: block;
 }
-.brandText {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-}
-.brandName {
-  font-size: 15px;
-  letter-spacing: -0.02em;
-}
+
+.brandText,
+.brandName,
 .brandTag {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
+  display: none;
 }
 
 /* Hero spacing: fix “buttons glued to image” */
