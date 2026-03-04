@@ -16,9 +16,10 @@ export default function OnePager() {
 
   return (
     <>
+      {/* NAV */}
       <header className="nav">
         <div className="navInner">
-          <div style={{ fontWeight: 750 }}>{site.projectName}</div>
+          <div className="brand">{site.projectName}</div>
           <nav className="navLinks">
             <a href="#byty">Seznam bytů</a>
             <a href="#okoli">Okolí</a>
@@ -31,7 +32,7 @@ export default function OnePager() {
 
       <main className="container">
         {/* HERO */}
-        <section id="top">
+        <section id="top" className="hero">
           <h1 className="h1">{site.heroH1}</h1>
           <p className="lead">{site.heroSubhead}</p>
 
@@ -44,16 +45,23 @@ export default function OnePager() {
           </div>
 
           <div className="btnRow">
-            <a className="btnPrimary" href="#byty">Zobrazit byty</a>
-            <a className="btnSecondary" href="#kontakt">Domluvit prohlídku</a>
+            <a className="btnPrimary" href="#byty">
+              Zobrazit byty
+            </a>
+            <a className="btnSecondary" href="#kontakt">
+              Domluvit prohlídku
+            </a>
           </div>
 
-          <img
-            className="heroImg"
-            src="/assets/hero.jpg"
-            alt={`${site.projectName} hero`}
-            onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
-          />
+          {/* Nice framed hero image */}
+          <div className="heroCard">
+            <img
+              className="heroImg"
+              src="/assets/hero.jpg"
+              alt={`${site.projectName} hero`}
+              onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
+            />
+          </div>
         </section>
 
         {/* BENEFITS */}
@@ -62,11 +70,8 @@ export default function OnePager() {
           <div className="grid3">
             {site.benefits.map((b) => (
               <div className="card" key={b}>
-                <div style={{ fontWeight: 700 }}>{b}</div>
-                <div style={{ marginTop: 8, color: "var(--muted)" }}>
-                  {/* You can replace this later with real proof lines */}
-                  Poctivé bydlení bez zbytečných kompromisů.
-                </div>
+                <div className="cardTitle">{b}</div>
+                <div className="cardText">Poctivé bydlení bez zbytečných kompromisů.</div>
               </div>
             ))}
           </div>
@@ -80,9 +85,15 @@ export default function OnePager() {
             <table>
               <thead>
                 <tr>
-                  {["Byt", "Podlaží", "Dispozice", "Plocha (m²)", "Balkon (m²)", "Orientace", "Cena", "Stav", ""].map((h) => (
-                    <th key={h}>{h}</th>
-                  ))}
+                  <th>Byt</th>
+                  <th>Podlaží</th>
+                  <th>Dispozice</th>
+                  <th>Plocha (m²)</th>
+                  <th>Balkon (m²)</th>
+                  <th>Orientace</th>
+                  <th>Cena</th>
+                  <th>Stav</th>
+                  <th />
                 </tr>
               </thead>
               <tbody>
@@ -91,17 +102,15 @@ export default function OnePager() {
                     <td>{u.id}</td>
                     <td>{u.floor}</td>
                     <td>{u.layout}</td>
-                    <td>{u.areaTotal || "—"}</td>
-                    <td>{u.balconyArea || "—"}</td>
+                    <td>{formatArea(u.areaTotal)}</td>
+                    <td>{formatArea(u.balconyArea)}</td>
                     <td>{u.orientation}</td>
                     <td>{u.price ? `${formatCzk(u.price)} Kč` : "—"}</td>
-                    <td><StatusPill status={u.status} /></td>
                     <td>
-                      <button
-                        className="modalClose"
-                        style={{ padding: "8px 10px" }}
-                        onClick={() => setOpenUnitId(u.id)}
-                      >
+                      <StatusPill status={u.status} />
+                    </td>
+                    <td>
+                      <button className="modalClose" onClick={() => setOpenUnitId(u.id)}>
                         Detail
                       </button>
                     </td>
@@ -119,13 +128,17 @@ export default function OnePager() {
         {/* LOCATION */}
         <section id="okoli" className="section">
           <h2 className="h2">Okolí</h2>
+
           <div className="card">
-            <div style={{ fontWeight: 700 }}>{site.addressLine}, {site.city}</div>
+            <div className="cardTitle">
+              {site.addressLine}, {site.city}
+            </div>
+
             <div style={{ marginTop: 12 }} className="grid3">
               {site.distances.map((d) => (
                 <div key={d.label} style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
                   <span style={{ color: "var(--muted)" }}>{d.label}</span>
-                  <span style={{ fontWeight: 700 }}>{d.value}</span>
+                  <span style={{ fontWeight: 760 }}>{d.value}</span>
                 </div>
               ))}
             </div>
@@ -136,12 +149,15 @@ export default function OnePager() {
               </a>
             </div>
 
-            <img
-              className="heroImg"
-              src="/assets/story.jpg"
-              alt="Okolí a atmosféra"
-              onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
-            />
+            {/* Optional image: will auto-hide if missing */}
+            <div className="heroCard" style={{ marginTop: 14 }}>
+              <img
+                className="heroImg"
+                src="/assets/story.jpg"
+                alt="Okolí a atmosféra"
+                onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
+              />
+            </div>
           </div>
         </section>
 
@@ -149,9 +165,9 @@ export default function OnePager() {
         <section id="standardy" className="section">
           <h2 className="h2">Standardy</h2>
           <div className="card">
-            <p style={{ marginTop: 0, color: "var(--muted)" }}>
+            <div className="cardText" style={{ marginTop: 0 }}>
               Detailní standardní provedení ke stažení v PDF.
-            </p>
+            </div>
             <div className="btnRow">
               <a className="btnPrimary" href={`/assets/${site.standardsPdfFileName}`}>
                 Stáhnout standardy (PDF)
@@ -166,8 +182,8 @@ export default function OnePager() {
           <div className="grid3">
             {site.timeline.map((t) => (
               <div className="card" key={t.label}>
-                <div style={{ fontWeight: 700 }}>{t.label}</div>
-                <div style={{ marginTop: 8, fontSize: 18 }}>{t.date}</div>
+                <div className="cardTitle">{t.label}</div>
+                <div style={{ marginTop: 10, fontSize: 18 }}>{t.date}</div>
               </div>
             ))}
           </div>
@@ -177,19 +193,22 @@ export default function OnePager() {
         <section id="kontakt" className="section">
           <h2 className="h2">Kontakt</h2>
           <div className="card">
-            <div style={{ fontWeight: 800 }}>{site.contact.name}</div>
-            <div style={{ marginTop: 8 }}>
-              <a href={`tel:${site.contact.phone.replace(/\s+/g, "")}`}>{site.contact.phone}</a>
+            <div style={{ fontWeight: 820 }}>{site.contact.name}</div>
+            <div style={{ marginTop: 10 }}>
+              <a href={`tel:${stripSpaces(site.contact.phone)}`}>{site.contact.phone}</a>
             </div>
             <div style={{ marginTop: 6 }}>
               <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
             </div>
 
             <div className="btnRow">
-              <a className="btnPrimary" href={`mailto:${site.contact.email}?subject=${encodeURIComponent(site.projectName)}%20-%20dotaz`}>
+              <a
+                className="btnPrimary"
+                href={`mailto:${site.contact.email}?subject=${encodeURIComponent(site.projectName)}%20-%20dotaz`}
+              >
                 Napsat email
               </a>
-              <a className="btnSecondary" href={`tel:${site.contact.phone.replace(/\s+/g, "")}`}>
+              <a className="btnSecondary" href={`tel:${stripSpaces(site.contact.phone)}`}>
                 Zavolat
               </a>
             </div>
@@ -202,9 +221,8 @@ export default function OnePager() {
         </section>
       </main>
 
-      {openUnit ? (
-        <UnitModal unit={openUnit} onClose={() => setOpenUnitId(null)} />
-      ) : null}
+      {/* MODAL */}
+      {openUnit ? <UnitModal unit={openUnit} onClose={() => setOpenUnitId(null)} /> : null}
     </>
   );
 }
@@ -225,26 +243,32 @@ function UnitModal({ unit, onClose }: { unit: Unit; onClose: () => void }) {
           <div>
             <h3 className="modalTitle">Byt {unit.id} ({unit.layout})</h3>
             <div style={{ marginTop: 6, color: "var(--muted)" }}>
-              Podlaží {unit.floor} · Orientace {unit.orientation} · Stav: {unit.status}
+              Podlaží {unit.floor} · Orientace {unit.orientation} · <StatusPill status={unit.status} />
             </div>
-            <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <span className="badge">Plocha: {unit.areaTotal || "—"} m²</span>
-              <span className="badge">Balkon: {unit.balconyArea || "—"} m²</span>
+
+            <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <span className="badge">Plocha: {formatArea(unit.areaTotal)} m²</span>
+              <span className="badge">Balkon: {formatArea(unit.balconyArea)} m²</span>
               <span className="badge">Cena: {unit.price ? `${formatCzk(unit.price)} Kč` : "—"}</span>
             </div>
           </div>
 
-          <button className="modalClose" onClick={onClose}>Zavřít</button>
+          <button className="modalClose" onClick={onClose}>
+            Zavřít
+          </button>
         </div>
 
         <div style={{ marginTop: 16 }} className="card">
-          {unit.shortDesc?.trim()
-            ? unit.shortDesc
-            : "Doplňte krátký popis bytu (3–5 vět)."}
+          <div className="cardTitle">Popis</div>
+          <div className="cardText">
+            {unit.shortDesc?.trim() ? unit.shortDesc : "Doplňte krátký popis bytu (3–5 vět)."}
+          </div>
         </div>
 
         <div className="btnRow" style={{ marginTop: 14 }}>
-          <a className="btnPrimary" href="#kontakt" onClick={onClose}>Domluvit prohlídku</a>
+          <a className="btnPrimary" href="#kontakt" onClick={onClose}>
+            Domluvit prohlídku
+          </a>
           <a className="btnSecondary" href={`/assets/${unit.pdfFile}`} target="_blank" rel="noreferrer">
             Stáhnout PDF
           </a>
@@ -256,4 +280,16 @@ function UnitModal({ unit, onClose }: { unit: Unit; onClose: () => void }) {
 
 function formatCzk(n: number) {
   return new Intl.NumberFormat("cs-CZ").format(n);
+}
+
+function stripSpaces(s: string) {
+  return s.replace(/\s+/g, "");
+}
+
+function formatArea(n: number) {
+  if (!n || Number.isNaN(n)) return "—";
+  // show 2 decimals only if needed
+  const rounded = Math.round(n * 100) / 100;
+  const asInt = Number.isInteger(rounded);
+  return asInt ? String(rounded) : rounded.toFixed(2);
 }
